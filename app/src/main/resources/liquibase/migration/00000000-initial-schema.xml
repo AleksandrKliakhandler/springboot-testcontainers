@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="alexander.kliakhandler">
+        <createTable tableName="example_table">
+            <column name="id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="text_field" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <sql>CREATE
+        EXTENSION IF NOT EXISTS pg_trgm;</sql>
+
+        <sql>
+            create index trigram_idx
+                on example_table using gin (text_field gin_trgm_ops);
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

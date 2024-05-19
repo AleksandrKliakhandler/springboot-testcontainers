@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/app'
+    username: app
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  main:
+    banner-mode: "off"
+  liquibase:
+    change-log: classpath:/liquibase/master.xml
